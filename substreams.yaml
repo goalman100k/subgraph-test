@@ -14,4 +14,21 @@ modules:
     initialBlock: 72934214
 
 params:
-  map_events: wasm
+  map_events: 
+    wasm-MarketDeployed ||
+    wasm-VaultSet ||
+    wasm-OperatorSet ||
+    wasm-TransferOwnership ||
+    wasm-MinBetAmountSet ||
+    wasm-GenesisStart ||
+    wasm-RoundLocked ||
+    wasm-RoundEnded ||
+    wasm-RoundStarted ||
+    wasm-PositionOpened ||
+    wasm-Claimed ||
+    wasm-GenesisTimeSet ||
+    wasm-OwnerChanged ||
+    wasm-MarketUpdated ||
+    wasm-TokenChanged ||
+    wasm-LiquidityAdded ||
+    wasm-LiquidityRemoved
