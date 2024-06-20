@@ -4,14 +4,14 @@ package:
   name: map_events
   version: v0.1.0
 
-network: injective-mainnet
+network: injective-testnet
 imports:
   injective: https://spkg.io/streamingfast/injective-common-v0.1.0.spkg
 
 modules:
   - name: map_events
     use: injective:filtered_events
-    initialBlock: 72934214
+    initialBlock: 33149377
 
 params:
   map_events: 

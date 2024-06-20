@@ -5,13 +5,14 @@
     "codegen": "graph codegen",
     "build": "graph build",
     "publish": "graph publish",
-    "deploy": "graph deploy --node https://api.studio.thegraph.com/deploy/ subgraphtest",
+    "deploy": "graph deploy --node https://api.studio.thegraph.com/deploy/ bullandbear-subgraph-test",
     "create-local": "graph create --node http://localhost:8020/ subgraphtest",
     "remove-local": "graph remove --node http://localhost:8020/ subgraphtest",
     "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 subgraphtest",
     "test": "graph test",
     "launch-graph-node": "./dev-environment/start.sh",
-    "reset-graph-node": "./dev-environment/start.sh -c"
+    "reset-graph-node": "./dev-environment/start.sh -c",
+    "compile": "substreams pack"
   },
   "dependencies": {
     "@graphprotocol/graph-cli": "^0.73.0",

@@ -12,16 +12,17 @@ export function handleEvents(bytes: Uint8Array): void {
 
     for (let i = 0; i < events.length; i++) {
         const event = events[i].event;
+        if (event == null || EVENT_TYPES.indexOf(event.type) == -1) {
+            return;
+        }
         
         // Filter by event types
         if (event == null) { // should be filtered by substreams
             continue;
         }
 
-        switch (event.type) {
-            case EVENT_TYPES.MarketDeployed:
-                handleMarketDeployed(event);
-                break;
+        if (event.type == "wasm-MarketDeployed") {
+            handleMarketDeployed(event);
         }
     }
 }
