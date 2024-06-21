@@ -8,10 +8,8 @@ enum Position {
 
 type Market @entity {
   id: ID!
-
+  vault: String!
   address: Bytes!
-  epoch: BigInt!
-  paused: Boolean!
 
   owner: String!
   operator: String!
@@ -36,7 +34,6 @@ type Round @entity {
   id: ID!
   market: Market!
 
-  timeframeId: Int!
   epoch: BigInt!
   position: Position
   failed: Boolean
@@ -45,19 +42,13 @@ type Round @entity {
 
   # Start
   startAt: BigInt
-  startBlock: BigInt
-  startHash: Bytes
 
   # Lock
   lockAt: BigInt
-  lockBlock: BigInt
-  lockHash: Bytes
   lockPrice: BigDecimal
 
   # End
   endAt: BigInt
-  endBlock: BigInt
-  endHash: Bytes
   closePrice: BigDecimal # endPrice
   # Bets
   totalBets: BigInt!
@@ -67,19 +58,11 @@ type Round @entity {
   bullAmount: BigDecimal!
   bearBets: BigInt!
   bearAmount: BigDecimal!
-  bets: [Bet!]! @derivedFrom(field: "round")
+  bets: [Bet!] @derivedFrom(field: "round")
 
-  # For sort
   estimatedStartTime: BigInt!
   estimatedLockTime: BigInt!
   estimatedEndTime: BigInt!
-}
-
-type Payout @entity {
-  id: ID!
-  market: Bytes!
-  user: User!
-  amount: BigDecimal!
 }
 
 type TotalBet @entity {
@@ -91,14 +74,6 @@ type TotalBet @entity {
   timeframeId: Int!
 }
 
-type WinBet @entity {
-  id: ID!
-  market: Bytes!
-  user: User!
-  count: BigInt!
-  amount: BigDecimal!
-}
-
 type User @entity {
   id: ID!
 
@@ -106,18 +81,10 @@ type User @entity {
   address: Bytes!
   address_string: String!
 
-  createdAt: BigInt!
-  updatedAt: BigInt!
-
-  # Block
-  block: BigInt!
-
   # Bets
   totalBets: [TotalBet!] @derivedFrom(field: "user")
-  winBets: [WinBet!] @derivedFrom(field: "user")
 
-  payouts: [Payout!] @derivedFrom(field: "user")
-  bets: [Bet!]! @derivedFrom(field: "user")
+  bets: [Bet!] @derivedFrom(field: "user")
 
   wholeBetAmount: BigDecimal!
   wholePayoutAmount: BigDecimal!
@@ -136,11 +103,9 @@ type Bet @entity {
   market: Market!
   # epoch
   round: Round!
-  #timeframe
-  timeframeId: Int!
 
   user: User!
-  hash: Bytes!
+  hash: Bytes
 
   amount: BigDecimal!
   position: Position!
@@ -151,79 +116,26 @@ type Bet @entity {
   createdAt: BigInt!
   updatedAt: BigInt!
 
-  # Block
-  block: BigInt!
-
   isReverted: Boolean!
-  creditUsed: Boolean!
 }
 
 type Vault @entity {
   id: ID!
   address: Bytes!
   market: Market
-  underlyingToken: Bytes!
-  decimals: Int!
-  vaultId: BigInt
 
   totalShares: BigDecimal!
   totalStakedAmount: BigDecimal!
   totalInvestedAmount: BigDecimal!
-  tokenIds: [BigInt!]!
-
+  
+  admin: String!
   feeAccrued: BigDecimal!
-  adminAddress: Bytes
-  config: Bytes
-  name: String
-  symbol: String!
-
-  snapshots: [VaultSnapshot!] @derivedFrom(field: "vault")
-  vaultActivities: [VaultActivity!] @derivedFrom(field: "vault")
-}
-
-enum WithdrawalState {
-  PENDING
-  RELEASED
-  CANCELED
-}
-
-type VaultSnapshot @entity {
-  id: ID!
-  vault: Vault!
-  timestamp: BigInt!
-  totalStakedAmount: BigDecimal!
-  totalShares: BigDecimal!
-  totalInvestedAmount: BigDecimal
-  managementFee: BigDecimal
-}
-
-type Withdrawal @entity {
-  id: ID!
-  vault: Vault!
-  tokenId: BigInt!
-  shareAmount: BigDecimal!
-  startTime: BigInt!
-  feeAmount: BigDecimal!
-
-  state: WithdrawalState
 }
 
 type VaultPosition @entity {
   id: ID!
   vault: Vault!
-  tokenId: BigInt!
   owner: Bytes!
   investAmount: BigDecimal!
   shareAmount: BigDecimal!
-  withdrawal: Withdrawal
-  timestamp: BigInt!
-}
-
-type VaultActivity @entity {
-  id: ID!
-  vault: Vault!
-  account: Bytes!
-  amount: BigDecimal!
-  timestamp: BigInt!
-  type: String!
 }

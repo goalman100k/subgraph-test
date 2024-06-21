@@ -1,3 +1,4 @@
+import { BigInt } from "@graphprotocol/graph-ts";
 import { MARKET_ADDRESS, VAULT_ADDRESS } from "./constant";
 import { Event } from "./pb/sf/cosmos/type/v2/Event";
 
@@ -13,3 +14,8 @@ export const isValidEventSource = (event: Event): bool => {
 
   return contract_addr == MARKET_ADDRESS || contract_addr == VAULT_ADDRESS;
 };
+
+export const getBlockTimeForEpoch = (genesisStartTime: BigInt, epoch: BigInt): BigInt => {
+  const duration = BigInt.fromI32(60);
+  return genesisStartTime.plus(epoch.times(duration));
+}

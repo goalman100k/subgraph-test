@@ -26,3 +26,6 @@ export const EVENT_TYPES = [
 export const ZERO_BI = BigInt.zero();
 export const ZERO_BD = BigDecimal.zero();
 export const ZERO_ADDRESS = Address.zero();
+
+export const ONE_BI = BigInt.fromI32(1);
+export const ONE_BD = BigDecimal.fromString("1");

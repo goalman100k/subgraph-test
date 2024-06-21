@@ -6,7 +6,7 @@ schema:
 dataSources:
   - kind: substreams
     name: filtered_events
-    network: injective-mainnet
+    network: injective-testnet
     source:
       package:
         moduleName: map_events

@@ -7,8 +7,6 @@ export const getMarket = (id: string): Market => {
   if (market == null) {
     market = new Market(id);
     market.address = Address.fromString(id);
-    market.epoch = ZERO_BI;
-    market.paused = false;
     market.totalUsers = ZERO_BI;
     market.totalBets = ZERO_BI;
     market.totalBetsBull = ZERO_BI;
@@ -22,6 +20,7 @@ export const getMarket = (id: string): Market => {
     market.operator = ZERO_ADDRESS.toHex();
 
     market.genesisStartTime = ZERO_BI;
+    market.vault = ZERO_ADDRESS.toHex();
     market.save();
   }
 
