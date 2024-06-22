@@ -22,6 +22,7 @@ import {
   handleMarketupdated,
   handleOwnerChanged,
 } from "./binary-vault";
+import { isValidEventSource } from "./helper";
 
 export function handleEvents(bytes: Uint8Array): void {
   const eventList: EventList = Protobuf.decode<EventList>(
@@ -41,6 +42,9 @@ export function handleEvents(bytes: Uint8Array): void {
     // Filter by event types
     if (event == null) {
       // should be filtered by substreams
+      continue;
+    }
+    if (!isValidEventSource(event)) {
       continue;
     }
 

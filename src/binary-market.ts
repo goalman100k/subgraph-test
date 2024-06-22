@@ -1,6 +1,11 @@
-import { isValidEventSource } from "./helper";
 import { Event } from "./pb/sf/cosmos/type/v2/Event";
-import { MARKET_ADDRESS, ONE_BI, ZERO_ADDRESS, ZERO_BD, ZERO_BI } from "./constant";
+import {
+  MARKET_ADDRESS,
+  ONE_BI,
+  ZERO_ADDRESS,
+  ZERO_BD,
+  ZERO_BI,
+} from "./constant";
 import { getMarket } from "./entities/Market";
 import { BigDecimal, BigInt } from "@graphprotocol/graph-ts";
 import { getRound } from "./entities/Round";
@@ -9,10 +14,6 @@ import { getTotalBet } from "./entities/TotalBet";
 import { getBet } from "./entities/Bet";
 
 export const handleMarketDeployed = (event: Event): void => {
-  // Filter by contract address
-  if (!isValidEventSource(event)) {
-    return;
-  }
   let market = getMarket(MARKET_ADDRESS);
   for (let i = 0; i < event.attributes.length; ++i) {
     const attr = event.attributes[i];
@@ -27,9 +28,6 @@ export const handleMarketDeployed = (event: Event): void => {
 };
 
 export const handleVaultSet = (event: Event): void => {
-  if (!isValidEventSource(event)) {
-    return;
-  }
   let market = getMarket(MARKET_ADDRESS);
   for (let i = 0; i < event.attributes.length; ++i) {
     const attr = event.attributes[i];
@@ -42,9 +40,6 @@ export const handleVaultSet = (event: Event): void => {
 };
 
 export const handleOperatorSet = (event: Event): void => {
-  if (!isValidEventSource(event)) {
-    return;
-  }
   let market = getMarket(MARKET_ADDRESS);
   for (let i = 0; i < event.attributes.length; ++i) {
     const attr = event.attributes[i];
@@ -56,11 +51,7 @@ export const handleOperatorSet = (event: Event): void => {
   market.save();
 };
 
-
 export const handleTransferOwnership = (event: Event): void => {
-  if (!isValidEventSource(event)) {
-    return;
-  }
   let market = getMarket(MARKET_ADDRESS);
   for (let i = 0; i < event.attributes.length; ++i) {
     const attr = event.attributes[i];
@@ -72,11 +63,7 @@ export const handleTransferOwnership = (event: Event): void => {
   market.save();
 };
 
-
 export const handleMinBetAmountSet = (event: Event): void => {
-  if (!isValidEventSource(event)) {
-    return;
-  }
   let market = getMarket(MARKET_ADDRESS);
   for (let i = 0; i < event.attributes.length; ++i) {
     const attr = event.attributes[i];
@@ -88,11 +75,7 @@ export const handleMinBetAmountSet = (event: Event): void => {
   market.save();
 };
 
-
 export const handleGenesisStart = (event: Event): void => {
-  if (!isValidEventSource(event)) {
-    return;
-  }
   let market = getMarket(MARKET_ADDRESS);
   for (let i = 0; i < event.attributes.length; ++i) {
     const attr = event.attributes[i];
@@ -104,12 +87,7 @@ export const handleGenesisStart = (event: Event): void => {
   market.save();
 };
 
-
 export const handleRoundLocked = (event: Event): void => {
-  if (!isValidEventSource(event)) {
-    return;
-  }
-  
   let epoch = ZERO_BI;
   let lock_price = ZERO_BD;
   let lock_time = ZERO_BI;
@@ -128,15 +106,11 @@ export const handleRoundLocked = (event: Event): void => {
   let round = getRound(MARKET_ADDRESS, epoch);
   round.lockPrice = lock_price;
   round.lockAt = lock_time;
-  
+
   round.save();
 };
 
 export const handleRoundEnded = (event: Event): void => {
-  if (!isValidEventSource(event)) {
-    return;
-  }
-  
   let epoch = ZERO_BI;
   let close_price = ZERO_BD;
   let close_time = ZERO_BI;
@@ -155,15 +129,11 @@ export const handleRoundEnded = (event: Event): void => {
   let round = getRound(MARKET_ADDRESS, epoch);
   round.closePrice = close_price;
   round.endAt = close_time;
-  
+
   round.save();
 };
 
 export const handleRoundStarted = (event: Event): void => {
-  if (!isValidEventSource(event)) {
-    return;
-  }
-  
   let epoch = ZERO_BI;
   let start_time = ZERO_BI;
 
@@ -178,21 +148,16 @@ export const handleRoundStarted = (event: Event): void => {
 
   let round = getRound(MARKET_ADDRESS, epoch);
   round.startAt = start_time;
-  
+
   round.save();
 };
 
-
 export const handlePositionOpened = (event: Event): void => {
-  if (!isValidEventSource(event)) {
-    return;
-  }
-  
   let epoch = ZERO_BI;
   let user_address = ZERO_ADDRESS.toHex();
   let amount = ZERO_BD;
   let position = "Bull";
-  
+
   for (let i = 0; i < event.attributes.length; ++i) {
     const attr = event.attributes[i];
     if (attr.key == "epoch") {
@@ -249,14 +214,10 @@ export const handlePositionOpened = (event: Event): void => {
 };
 
 export const handleClaimed = (event: Event): void => {
-  if (!isValidEventSource(event)) {
-    return;
-  }
-  
   let epoch = ZERO_BI;
   let user_address = ZERO_ADDRESS.toHex();
   let amount = ZERO_BD;
-  
+
   for (let i = 0; i < event.attributes.length; ++i) {
     const attr = event.attributes[i];
     if (attr.key == "user") {
@@ -272,16 +233,11 @@ export const handleClaimed = (event: Event): void => {
   bet.claimed = true;
   bet.claimedAmount = amount;
   bet.save();
-
-}
+};
 
 export const handleGenesisTimeSet = (event: Event): void => {
-  if (!isValidEventSource(event)) {
-    return;
-  }
-  
   let genesis_time = ZERO_BI;
-  
+
   for (let i = 0; i < event.attributes.length; ++i) {
     const attr = event.attributes[i];
     if (attr.key == "genesiss_time") {
@@ -293,5 +249,4 @@ export const handleGenesisTimeSet = (event: Event): void => {
   market.genesisStartTime = genesis_time;
 
   market.save();
-}
-
+};

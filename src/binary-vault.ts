@@ -1,15 +1,10 @@
 import { BigDecimal } from "@graphprotocol/graph-ts";
 import { VAULT_ADDRESS, ZERO_ADDRESS, ZERO_BD } from "./constant";
 import { getVault } from "./entities/Vault";
-import { isValidEventSource } from "./helper";
 import { Event } from "./pb/sf/cosmos/type/v2/Event";
 import { getVaultPosition } from "./entities/VaultPosition";
 
 export const handleOwnerChanged = (event: Event): void => {
-  if (!isValidEventSource(event)) {
-    return;
-  }
-
   let owner = ZERO_ADDRESS.toHex();
 
   for (let i = 0; i < event.attributes.length; ++i) {
@@ -26,10 +21,6 @@ export const handleOwnerChanged = (event: Event): void => {
 };
 
 export const handleMarketupdated = (event: Event): void => {
-  if (!isValidEventSource(event)) {
-    return;
-  }
-
   let market = ZERO_ADDRESS.toHex();
   let value = false;
   for (let i = 0; i < event.attributes.length; ++i) {
@@ -52,10 +43,6 @@ export const handleMarketupdated = (event: Event): void => {
 };
 
 export const handleLiquidityAdded = (event: Event): void => {
-  if (!isValidEventSource(event)) {
-    return;
-  }
-
   let user_address = ZERO_ADDRESS.toHex();
   let amount = ZERO_BD;
   let share = ZERO_BD;
@@ -87,10 +74,6 @@ export const handleLiquidityAdded = (event: Event): void => {
 };
 
 export const handleLiquidityRemoved = (event: Event): void => {
-  if (!isValidEventSource(event)) {
-    return;
-  }
-
   let user_address = ZERO_ADDRESS.toHex();
   let amount = ZERO_BD;
   let share = ZERO_BD;
