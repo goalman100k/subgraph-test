@@ -1,4 +1,3 @@
-import { Address } from "@graphprotocol/graph-ts";
 import { VaultPosition } from "../../generated/schema";
 import { ZERO_BD } from "../constant";
 
@@ -21,7 +20,7 @@ export const getVaultPosition = (
     vaultPosition.vault = vault_address;
     vaultPosition.investAmount = ZERO_BD;
     vaultPosition.shareAmount = ZERO_BD;
-    vaultPosition.owner = Address.fromString(user_address);
+    vaultPosition.owner = user_address;
     vaultPosition.save();
   }
   return vaultPosition;

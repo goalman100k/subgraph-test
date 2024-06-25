@@ -1,4 +1,4 @@
-import { Address, BigDecimal, BigInt } from "@graphprotocol/graph-ts";
+import { BigDecimal, BigInt } from "@graphprotocol/graph-ts";
 
 export const VAULT_ADDRESS = "inj1xmj4t3la5uxzh502lr5l34rxmp50jammdkgj5n";
 export const MARKET_ADDRESS = "inj1juklwzneugw0k6ehelqanqgd22p5xvak8jenxw";
@@ -25,7 +25,6 @@ export const EVENT_TYPES = [
 
 export const ZERO_BI = BigInt.zero();
 export const ZERO_BD = BigDecimal.zero();
-export const ZERO_ADDRESS = Address.zero();
 
 export const ONE_BI = BigInt.fromI32(1);
 export const ONE_BD = BigDecimal.fromString("1");
