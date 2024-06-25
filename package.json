@@ -10,7 +10,7 @@
     "remove-local": "graph remove --node http://localhost:8020/ subgraphtest",
     "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 subgraphtest",
     "test": "graph test",
-    "launch-graph-node": "set SUBSTREAMS_API_TOKEN=server_8822edc158f6d254d12e469b10b2afd3 && ./dev-environment/start.sh",
+    "launch-graph-node": "./dev-environment/start.sh",
     "reset-graph-node": "./dev-environment/start.sh -c",
     "compile": "substreams pack"
   },
