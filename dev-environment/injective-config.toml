@@ -8,11 +8,11 @@ pool_size = 10
 
 [chains]
 ingestor = "block_ingestor_node"
-[chains.injective-mainnet]
+[chains.injective-testnet]
 protocol = "substreams"
 shard = "primary"
 provider = [
-    { label = "substreams", details = { type = "substreams", url = "https://mainnet.injective.streamingfast.io:443", token = "$SUBSTREAMS_API_TOKEN", conn_pool_size = 1 } },
+    { label = "substreams", details = { type = "substreams", url = "https://testnet.injective.streamingfast.io:443", token = "$SUBSTREAMS_API_TOKEN", conn_pool_size = 1 } },
 ]
 
 [deployment]
