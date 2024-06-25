@@ -71,7 +71,6 @@ type TotalBet @entity {
   user: User
   count: BigInt!
   amount: BigDecimal!
-  timeframeId: Int!
 }
 
 type User @entity {
