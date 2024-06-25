@@ -1,6 +1,6 @@
 import { Address, BigInt } from "@graphprotocol/graph-ts";
 import { Market, Round } from "../../generated/schema";
-import { ZERO_ADDRESS, ZERO_BD, ZERO_BI } from "../constant";
+import { ZERO_BD, ZERO_BI } from "../constant";
 import { getBlockTimeForEpoch } from "../helper";
 import { getMarket } from "./Market";
 

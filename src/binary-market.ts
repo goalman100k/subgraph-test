@@ -2,7 +2,6 @@ import { Event } from "./pb/sf/cosmos/type/v2/Event";
 import {
   MARKET_ADDRESS,
   ONE_BI,
-  ZERO_ADDRESS,
   ZERO_BD,
   ZERO_BI,
 } from "./constant";
@@ -154,7 +153,7 @@ export const handleRoundStarted = (event: Event): void => {
 
 export const handlePositionOpened = (event: Event): void => {
   let epoch = ZERO_BI;
-  let user_address = ZERO_ADDRESS.toHex();
+  let user_address = "";
   let amount = ZERO_BD;
   let position = "Bull";
 
@@ -215,7 +214,7 @@ export const handlePositionOpened = (event: Event): void => {
 
 export const handleClaimed = (event: Event): void => {
   let epoch = ZERO_BI;
-  let user_address = ZERO_ADDRESS.toHex();
+  let user_address = "";
   let amount = ZERO_BD;
 
   for (let i = 0; i < event.attributes.length; ++i) {

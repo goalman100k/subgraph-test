@@ -8,11 +8,11 @@ enum Position {
 
 type Market @entity {
   id: ID!
-  vault: String!
-  address: Bytes!
+  vault: String
+  address: String
 
-  owner: String!
-  operator: String!
+  owner: String
+  operator: String
 
   totalUsers: BigInt!
   totalBets: BigInt!
@@ -32,7 +32,7 @@ type Market @entity {
 
 type Round @entity {
   id: ID!
-  market: Market!
+  market: Market
 
   epoch: BigInt!
   position: Position
@@ -67,8 +67,8 @@ type Round @entity {
 
 type TotalBet @entity {
   id: ID!
-  market: Bytes!
-  user: User!
+  market: String
+  user: User
   count: BigInt!
   amount: BigDecimal!
   timeframeId: Int!
@@ -78,8 +78,7 @@ type User @entity {
   id: ID!
 
   # Address
-  address: Bytes!
-  address_string: String!
+  address: String
 
   # Bets
   totalBets: [TotalBet!] @derivedFrom(field: "user")
@@ -100,18 +99,18 @@ type Bet @entity {
   id: ID!
 
   # market address
-  market: Market!
+  market: Market
   # epoch
   round: Round!
 
   user: User!
-  hash: Bytes
+  hash: String
 
   amount: BigDecimal!
   position: Position!
   claimed: Boolean!
   claimedAmount: BigDecimal
-  claimedHash: Bytes
+  claimedHash: String
 
   createdAt: BigInt!
   updatedAt: BigInt!
@@ -121,21 +120,21 @@ type Bet @entity {
 
 type Vault @entity {
   id: ID!
-  address: Bytes!
+  address: String
   market: Market
 
   totalShares: BigDecimal!
   totalStakedAmount: BigDecimal!
   totalInvestedAmount: BigDecimal!
   
-  admin: String!
+  admin: String
   feeAccrued: BigDecimal!
 }
 
 type VaultPosition @entity {
   id: ID!
   vault: Vault!
-  owner: Bytes!
+  owner: String
   investAmount: BigDecimal!
   shareAmount: BigDecimal!
 }

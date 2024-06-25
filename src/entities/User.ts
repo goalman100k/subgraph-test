@@ -6,8 +6,7 @@ export const getUser = (user_address: string): User => {
     let user = User.load(user_address);
     if (user == null) {
         user = new User(user_address);
-        user.address = Address.fromString(user_address);
-        user.address_string = user_address;
+        user.address = user_address;
         user.wholeBetAmount = ZERO_BD;
         user.wholePayoutAmount = ZERO_BD;
 
