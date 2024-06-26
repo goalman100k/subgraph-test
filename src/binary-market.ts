@@ -129,6 +129,20 @@ export const handleRoundEnded = (event: Event): void => {
   round.closePrice = close_price;
   round.endAt = close_time;
 
+  // Get round result based on lock/close price.
+  if (round.closePrice && round.lockPrice) {
+    if ((round.closePrice as BigDecimal).equals(round.lockPrice as BigDecimal)) {
+      round.position = "House";
+    } else if ((round.closePrice as BigDecimal).gt(round.lockPrice as BigDecimal)) {
+      round.position = "Bull";
+    } else if ((round.closePrice as BigDecimal).lt(round.lockPrice as BigDecimal)) {
+      round.position = "Bear";
+    } else {
+      round.position = null;
+    }
+    round.failed = false;
+  }
+
   round.save();
 };
 
@@ -166,7 +180,7 @@ export const handlePositionOpened = (event: Event): void => {
     } else if (attr.key == "amount") {
       amount = BigDecimal.fromString(attr.value);
     } else if (attr.key == "position") {
-      position = attr.value == "0" ? "Bull" : "Bear";
+      position = attr.value;
     }
   }
 
